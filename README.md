@@ -144,11 +144,21 @@ The skill won't go above 6 lenses without an explicit ask.
 ## Attribution
 
 Inspired by Andrej Karpathy's
-[`llm-council`](https://github.com/karpathy/llm-council), which
-implements the parallel-review-then-chair pattern as a multi-vendor
-LLM web app. This skill ports the *idea* into the Claude Code skill
-format — the parallel reviewers are subagents of one model, and the
-chair is the invoking session itself.
+[`llm-council`](https://github.com/karpathy/llm-council). His project
+runs in a very different way — it spins up a web app that queries
+several different vendor models (OpenAI, Anthropic, Google, xAI) and
+has them rank each other's answers. That was a bit beyond what I was
+looking for. I was okay with the different personas all coming from
+Claude. What I wanted was something simpler — an internal red team that
+gives me distinct angles on the same artifact without me having to set
+up multi-vendor billing or run a server.
+
+I do understand the tradeoff. Different lenses inside the same model
+family will produce more correlated answers than a true multi-vendor
+council, so some of the divergence Karpathy's setup buys you isn't
+available here. In practice, the structured lens prompts plus the
+explicit "find conflicts, don't average them" synthesis rule recover
+most of the value — at least for the kinds of reviews I run.
 
 ---
 
